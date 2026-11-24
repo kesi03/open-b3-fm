@@ -1,0 +1,25 @@
+{
+  "seconds": 6,
+  "float": true,
+  "daw": { "bpm": 120, "at": 1.0, "start": 6, "loop": [4, 12], "sig": [4, 4] },
+  "steps": [
+    { "t": 0.0, "shot": "01-before-daw-play" },
+    { "t": 1.10, "shot": "02-daw-playing-no-drums" },
+    { "t": 1.90, "shot": "03-still-silent" },
+
+    { "t": 2.00, "ev": [1, 0, 1, 1.0] },
+    { "t": 2.10, "shot": "04-explicit-pad-start" },
+
+    { "t": 3.00, "ev": [1, 0, 1, 1.0] },
+    { "t": 3.10, "shot": "05-explicit-pad-stop" },
+
+    { "t": 4.00, "ev": [8, 0, 0, 0] },
+    { "t": 4.10, "shot": "06-daw-stop-did-not-start-drums" },
+
+    { "t": 4.50, "ev": [1, 3, 1, 1.0] },
+    { "t": 4.60, "shot": "07-explicit-restart" },
+
+    { "t": 5.20, "ev": [10, 64, 0, 0.0] },
+    { "t": 5.30, "shot": "08-drum-fader-zero" }
+  ]
+}

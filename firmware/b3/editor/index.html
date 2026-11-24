@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OPEN B3 · Vibe FM tonewheel organ</title>
+<style>
+  :root {
+    color-scheme: dark;
+    --plum:#100a18; --panel:#1e1230; --panel2:#301e4b; --line:#5b3a80;
+    --purple:#b45cff; --lilac:#e6c6ff; --cream:#f5ebff; --muted:#ba9fd1; --dim:#8b72a6;
+    --green:#9bcb63; --pink:#e06a8f; --fg:#f5ebff;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; padding:18px; background:var(--plum); color:var(--fg);
+         font:14px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif;
+         background-image:repeating-linear-gradient(0deg,transparent 0 42px,rgba(180,92,255,.025) 42px 43px); }
+  .hero { display:flex; align-items:center; gap:18px; padding:16px 18px; border:2px solid var(--purple);
+          border-radius:14px; background:linear-gradient(115deg,var(--panel) 0%,#3a1f58 60%,#241338 100%);
+          position:relative; overflow:hidden; }
+  .hero:after { content:""; position:absolute; right:-40px; top:-70px; width:220px; height:220px;
+                border-radius:50%; border:16px solid rgba(230,198,255,.12); }
+  .leslie { width:104px; height:100px; flex:none; filter:drop-shadow(0 3px 0 rgba(0,0,0,.4)); }
+  .rotor { transform-origin:52px 22px; animation:spin 2s linear infinite; }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  .brand { flex:1; min-width:0; }
+  .kicker { font-size:10px; letter-spacing:.34em; color:var(--lilac); text-transform:uppercase; }
+  h1 { margin:2px 0 0; font-size:clamp(30px,6vw,54px); line-height:.95; letter-spacing:.02em;
+       color:var(--purple); text-shadow:2px 2px 0 #4b1b78; }
+  .brand p { margin:6px 0 0; font-size:11px; letter-spacing:.22em; color:var(--cream); text-transform:uppercase; }
+  .badge { flex:none; border:2px dashed var(--lilac); border-radius:50%; width:88px; height:88px;
+           display:grid; place-content:center; text-align:center; color:var(--lilac);
+           font-size:10px; font-weight:800; letter-spacing:.12em; line-height:1.3; transform:rotate(-9deg); }
+  .statusbar { display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin:10px 0 16px;
+               padding:8px 12px; border-radius:8px; background:var(--panel); border:1px solid var(--line); }
+  #status { flex:1; min-width:180px; color:var(--lilac); font-variant-numeric:tabular-nums; font-size:12px; }
+  .pill { padding:3px 9px; border-radius:999px; background:rgba(180,92,255,.16); color:var(--purple);
+          font-size:10px; letter-spacing:.14em; text-transform:uppercase; border:1px solid rgba(180,92,255,.38); }
+  h2 { margin:0 0 10px; font-size:13px; letter-spacing:.2em; text-transform:uppercase; color:var(--purple); }
+  .panel { border:1px solid var(--line); border-radius:12px; padding:14px; margin:0 0 14px;
+           background:linear-gradient(180deg,var(--panel2),var(--panel)); box-shadow:0 6px 18px rgba(0,0,0,.25); }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(215px,1fr)); gap:8px 16px; }
+  label { display:grid; grid-template-columns:minmax(96px,1fr) 78px; align-items:center; gap:6px;
+          font-size:11px; color:var(--muted); }
+  label output { text-align:right; color:var(--cream); font-variant-numeric:tabular-nums; }
+  input[type=range] { grid-column:1 / -1; width:100%; accent-color:var(--purple); }
+  select { grid-column:1 / -1; width:100%; padding:5px; border-radius:6px; background:var(--plum);
+           color:var(--fg); border:1px solid var(--line); }
+  .presets { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:8px; }
+  .presets button { padding:10px 8px; font-size:11px; }
+  button { font:inherit; padding:6px 9px; border-radius:6px; border:1px solid var(--purple);
+           background:var(--plum); color:var(--purple); cursor:pointer; font-weight:700;
+           font-size:11px; letter-spacing:.1em; text-transform:uppercase; }
+  button:hover { background:var(--purple); color:var(--plum); }
+  button:active { transform:translateY(1px); }
+  .note { margin:10px 0 0; color:var(--muted); font-size:11px; }
+  .note b { color:var(--cream); }
+  .display { width:480px; max-width:100%; image-rendering:pixelated; border:1px solid var(--line); border-radius:6px; }
+  footer { padding:12px 4px 24px; color:var(--dim); font-size:10px; letter-spacing:.1em; text-transform:uppercase; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <svg class="leslie" viewBox="0 0 104 100" aria-label="Leslie speaker logo">
+    <rect x="11" y="25" width="82" height="67" rx="6" fill="#301e4b" stroke="#e6c6ff" stroke-width="2"/>
+    <rect x="18" y="32" width="68" height="52" rx="3" fill="#100a18" stroke="#5b3a80" stroke-width="1"/>
+    <g class="rotor">
+      <ellipse cx="35" cy="22" rx="19" ry="8" fill="#b45cff" stroke="#e6c6ff" stroke-width="2"/>
+      <ellipse cx="69" cy="22" rx="19" ry="8" fill="#b45cff" stroke="#e6c6ff" stroke-width="2"/>
+      <path d="M35 22 L52 22 L69 22" stroke="#e6c6ff" stroke-width="2"/>
+    </g>
+    <circle cx="52" cy="22" r="6" fill="#f5ebff" stroke="#5b3a80" stroke-width="2"/>
+    <path d="M18 38 H86 M18 46 H86 M18 54 H86 M18 62 H86 M18 70 H86 M18 78 H86"
+          stroke="#5b3a80" stroke-width="2"/>
+    <path d="M28 32 V84 M38 32 V84 M66 32 V84 M76 32 V84" stroke="#b45cff" stroke-width="1.5" opacity=".6"/>
+    <rect x="17" y="92" width="12" height="6" fill="#e6c6ff"/>
+    <rect x="75" y="92" width="12" height="6" fill="#e6c6ff"/>
+  </svg>
+  <div class="brand">
+    <div class="kicker">Vibe FM · tonewheel B3</div>
+    <h1>OPEN B3</h1>
+    <p>Beatrix engine · scanner vibrato · Leslie · eight grooves · 24 presets</p>
+  </div>
+  <div class="badge">24<br>PRESETS</div>
+</header>
+
+<div class="statusbar">
+  <span id="status">waking up the tone generator…</span>
+  <span class="pill" id="preset-pill">JAZZ</span>
+  <span class="pill" id="rhythm-pill">groove off</span>
+</div>
+
+<section class="panel">
+  <h2>Factory presets <small>Jimmy Smith, Green Onions, Georgie Fame and friends</small></h2>
+  <div class="presets" id="presets"></div>
+  <p class="note">On the hardware: hold <b>SHIFT</b> and turn <b>A</b>/<b>B</b>, or press SHIFT + ◀ / ▶, to browse the same presets. The name is in the top right of the display.</p>
+</section>
+
+<div id="cards"></div>
+
+<section class="panel">
+  <h2>Device display</h2>
+  <canvas class="display" id="display" width="480" height="320"></canvas>
+  <p class="note"><b>Drums are always opt-in:</b> tap <b>pads 1–8</b> or the DRUMS toggle to start; DAW Play and Record never start them. <b>Pads 9–16</b> play chord stabs. The <b>mixer</b> has four slots — upper, lower, pedal and drums — each with its own level. Keys and MIDI play the upper manual; MIDI channel 2 the lower, channel 3 the pedals.</p>
+</section>
+
+<footer>Built with the VIBE FM SDK · tonewheel engine from OpenB3 / setBfree Beatrix · AGPL-3.0-or-later / GPL-2.0-or-later · the firmware stays playable without this page</footer>
+
+<script src="vibe-editor.js"></script>
+<script>
+(async () => {
+  await vibe.ready;
+  const $ = (id) => document.getElementById(id);
+  const sliders = [];
+  const presetParam = vibe.params.find((p) => p.id === 'preset');
+  const groups = [...new Set(vibe.params.map((p) => p.group || 'OTHER'))];
+
+  if (presetParam && presetParam.choices) {
+    presetParam.choices.forEach((name, i) => {
+      const b = document.createElement('button');
+      b.textContent = String(i + 1).padStart(2, '0') + ' · ' + name;
+      b.onclick = () => vibe.set(presetParam.i, i);
+      $('presets').append(b);
+    });
+  }
+
+  for (const g of groups) {
+    const card = document.createElement('section'); card.className = 'panel';
+    const h = document.createElement('h2'); h.textContent = g; card.append(h);
+    const grid = document.createElement('div'); grid.className = 'grid';
+    for (const p of vibe.params.filter((q) => (q.group || 'OTHER') === g)) {
+      const label = document.createElement('label');
+      const name = document.createElement('span'); name.textContent = p.name;
+      const out = document.createElement('output');
+      let input;
+      if (p.steps > 1 && p.choices && p.choices.length) {
+        input = document.createElement('select');
+        p.choices.forEach((c, k) => input.add(new Option(c, String(k))));
+        input.onchange = () => vibe.set(p.i, p.min + (+input.value) * (p.max - p.min) / (p.steps - 1));
+      } else {
+        input = document.createElement('input'); input.type = 'range';
+        input.min = '0'; input.max = '1000'; input.step = '1';
+        input.oninput = () => vibe.set(p.i, p.min + (+input.value) / 1000 * (p.max - p.min));
+      }
+      label.append(name, out, input); grid.append(label);
+      sliders.push({ p, input, out });
+    }
+    card.append(grid); $('cards').append(card);
+  }
+
+  vibe.onValues((values) => {
+    for (const { p, input, out } of sliders) {
+      const v = values[p.i]; if (v === undefined) continue;
+      if (p.steps > 1 && p.choices) {
+        const k = Math.round((v - p.min) / ((p.max - p.min) || 1) * (p.steps - 1));
+        if (document.activeElement !== input) input.value = String(k);
+        out.textContent = p.choices[k] || '';
+      } else {
+        if (document.activeElement !== input)
+          input.value = String(Math.round((v - p.min) / ((p.max - p.min) || 1) * 1000));
+        out.textContent = v.toFixed(2) + (p.unit ? ' ' + p.unit : '');
+      }
+    }
+    if (presetParam && presetParam.choices) {
+      const k = Math.round(values[presetParam.i] || 0);
+      $('preset-pill').textContent = presetParam.choices[k] || 'PRESET';
+    }
+    const rhythm = vibe.params.find((p) => p.id === 'rhythm');
+    const run = vibe.params.find((p) => p.id === 'rhythm_run');
+    if (rhythm && run) {
+      $('rhythm-pill').textContent = values[run.i] > .5
+        ? (rhythm.choices[Math.round(values[rhythm.i])] || 'groove on') : 'groove off';
+    }
+  });
+
+  const disp = $('display');
+  vibe.onFrame((fb) => vibe.paint(disp, fb));
+})();
+</script>
+</body>
+</html>

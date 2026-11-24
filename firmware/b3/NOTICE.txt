@@ -1,0 +1,29 @@
+OpenB3 / setBfree Beatrix attribution
+=====================================
+
+This firmware contains a freestanding port of the Beatrix C audio engine from
+OpenB3 by Michele Perrone (https://github.com/michele-perrone/OpenB3).
+
+OpenB3 source used:
+  BeatrixCPP/Source/tonegen/*
+  BeatrixCPP/Source/vibrato/*
+  BeatrixCPP/Source/reverb/*
+  BeatrixCPP/Source/whirl/*
+  BeatrixCPP/Source/overdrive/*
+  and the corresponding headers / global_definitions.
+
+OpenB3 is licensed under the GNU Affero General Public License v3.0 or later.
+A copy of that license is in LICENSE.
+
+The tonewheel, vibrato, reverb, rotary speaker and preamp C files themselves
+originate from setBfree by Robin Gareus and contributors, and are licensed
+under the GNU General Public License version 2 or (at your option) any later
+version. The copyright and licence headers in each engine source file are
+preserved verbatim. The GPL-2.0-or-later text is available at
+https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+
+The VIBE FM front end (main.c), freestanding compatibility layer, and rhythm/
+chord pad engine are additional work licensed under AGPL-3.0-or-later.
+
+VIBE FM SDK (sdk/) is Copyright 2026 Sven Trogus (zvenson) and licensed under
+the Apache License 2.0; see sdk/LICENSE and sdk/NOTICE.

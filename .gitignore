@@ -1,0 +1,18 @@
+# Build outputs
+sdk/build/
+**/build/
+*.o
+*.a
+*.so
+*.dll
+*.exe
+*.zip
+
+# Editor / IDE / OS files
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+Thumbs.db
+desktop.ini

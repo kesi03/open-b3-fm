@@ -1,0 +1,9 @@
+{
+  "id": "b3",
+  "name": "OPEN B3",
+  "version": "0.3.0",
+  "author": "keste",
+  "description": "Tonewheel B3 organ from OpenB3/setBfree Beatrix: Leslie, opt-in drums, four-slot mixer, chord stabs and 24 classic presets.",
+  "license": "AGPL-3.0-or-later; Beatrix/setBfree GPL-2.0-or-later",
+  "protocol": 7
+}
